@@ -21,11 +21,15 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @Post('add/tags')
+  addTags(@Body() params: { tags: string[]; userId: number }) {
+    return this.userService.addTags(params);
+  }
+
   @Get()
   findAll(@Query() query: { keyword: string; page: number; pageSize: number }) {
-    console.log(query);
-    query.page = Number(query.page);
-    query.pageSize = Number(query.pageSize);
+    query.page = query.page;
+    query.pageSize = query.pageSize;
     return this.userService.findAll(query);
   }
 
