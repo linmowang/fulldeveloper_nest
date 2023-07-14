@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from './config/config.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ConfigModule } from './config/config.module';
     ConfigModule.forRoot({
       path: '/static',
     }),
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],

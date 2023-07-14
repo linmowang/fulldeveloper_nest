@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as cors from 'cors';
 import * as session from 'express-session';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 // 全局白名单中间件
 // import { Request, Response, NextFunction } from 'express';
@@ -18,7 +20,8 @@ import * as session from 'express-session';
 // }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useStaticAssets(join(__dirname, 'images'), { prefix: '/images' });
   // app.use(middleWareAll);
   app.use(cors());
   app.use(
