@@ -9,6 +9,7 @@ import {
   Query,
   Req,
   Res,
+  Inject,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,7 +18,16 @@ import * as svgCaptcha from 'svg-captcha';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    @Inject('Config') private readonly base: any,
+  ) {}
+
+  // test Config
+  @Get('config')
+  testConfig() {
+    return this.base;
+  }
 
   @Get('code')
   createCode(@Req() req, @Res() res) {

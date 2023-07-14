@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
@@ -20,6 +21,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true, //如果为true,将自动加载实体forFeature()方法注册的每个实体都将自动添加到配置对象的实体
     }),
     UserModule,
+    ConfigModule.forRoot({
+      path: '/static',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
