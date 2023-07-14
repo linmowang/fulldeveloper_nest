@@ -4,8 +4,22 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as cors from 'cors';
 import * as session from 'express-session';
 
+// 全局白名单中间件
+// import { Request, Response, NextFunction } from 'express';
+// function middleWareAll(req: Request, res: Response, next: NextFunction) {
+//   console.log(req.originalUrl);
+//   const whiteList = ['/user/config'];
+//   if (whiteList.includes(req.originalUrl)) {
+//     next();
+//   } else {
+//     res.send('小黑子露出鸡脚了吧');
+//   }
+//   next();
+// }
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // app.use(middleWareAll);
   app.use(cors());
   app.use(
     session({
