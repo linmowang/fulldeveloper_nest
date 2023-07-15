@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from './config/config.module';
 import { UploadModule } from './upload/upload.module';
+import { ManagerModule } from './manager/manager.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UploadModule } from './upload/upload.module';
       path: '/static',
     }),
     UploadModule,
+    ManagerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
