@@ -41,7 +41,7 @@ export class ManagerService {
             Manager,
             { id: transferMoneyDto.toId },
             {
-              money: to.money + Number(transferMoneyDto.money),
+              money: to.money + transferMoneyDto.money,
             },
           );
           // await manager.save(Manager, {

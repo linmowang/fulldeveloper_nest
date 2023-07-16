@@ -5,6 +5,10 @@ import * as cors from 'cors';
 import * as session from 'express-session';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { ResInterceptor } from './commom/resInterceptor';
+import { HttpFilter } from './commom/httpFilter';
+import { ValidationPipe } from '@nestjs/common';
+import { RoleGuard } from './manager/role/role.guard';
 
 // 全局白名单中间件
 // import { Request, Response, NextFunction } from 'express';
@@ -48,6 +52,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
   // swagger end
+
+  app.useGlobalInterceptors(new ResInterceptor());
+  app.useGlobalFilters(new HttpFilter());
+  app.useGlobalPipes(new ValidationPipe());
+  // app.useGlobalGuards(new RoleGuard());
 
   await app.listen(3000);
 }
